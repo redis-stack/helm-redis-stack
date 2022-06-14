@@ -1,0 +1,8 @@
+deployment:
+  image: "redis/redis-stack"
+  tag: "edge"
+name: redis-stack
+server_name: redis-stack-server
+statefulset:
+  image: "redis-stack-server"
+  tage: latest

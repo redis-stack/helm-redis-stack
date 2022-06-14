@@ -7,8 +7,8 @@ metadata:
 spec:
   ports:
   - port: 6379
-    name: redis-stack
+    name: "{{ .Values.name }}"
     targetPort: 6379
   type: NodePort
   selector:
-    app: redis-stack
+    app: "{{ .Values.name }}"

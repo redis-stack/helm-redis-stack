@@ -1,36 +1,37 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: redis-stack-server
+  name: "{{ .Values.server_name }}"
   labels:
-    app: redis-stack-server
+    app: "{{ .Values.server_name }}"
 spec:
   ports:
   - port: 6379
     name: db
   type: NodePort
   selector:
-    app: redis-stack-server
+    app: "{{ .Values.server_name }}"
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: redis-stack-server
+  name: "{{ .Values.server_name }}"
 spec:
   selector:
     matchLabels:
-      app: redis-stack-server # has to match .spec.template.metadata.labels
-  serviceName: "redis-stack-server"
+      app: "{{ .Values.server_name }}" # has to match .spec.template.metadata.labels
+  serviceName: "{{ .Values.server_name }}"
   replicas: 1
   template:
     metadata:
       labels:
-        app: redis-stack-server # has to match .spec.selector.matchLabels
+        app: "{{ .Values.server_name }}" # has to match .spec.selector.matchLabels
     spec:
       terminationGracePeriodSeconds: 10
       containers:
-      - name: redis-stack-server
-        image: redis/redis-stack-server
+      - name: "{{ .Values.server_name }}"
+        image: "{{ .Values.statefulset.image }}:{{ .Values.statefulset.tag }}"
+        imagePullPolicy: Always
         ports:
         - containerPort: 6379
           name: db
