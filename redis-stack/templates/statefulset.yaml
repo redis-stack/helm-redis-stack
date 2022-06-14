@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-stack-server
+  labels:
+    app: redis-stack-server
+spec:
+  ports:
+  - port: 6379
+    name: db
+  type: NodePort
+  selector:
+    app: redis-stack-server
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis-stack-server
+spec:
+  selector:
+    matchLabels:
+      app: redis-stack-server # has to match .spec.template.metadata.labels
+  serviceName: "redis-stack-server"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis-stack-server # has to match .spec.selector.matchLabels
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: redis-stack-server
+        image: redis/redis-stack-server
+        ports:
+        - containerPort: 6379
+          name: db
+  volumeClaimTemplates:
+  - metadata:
+      name: db
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "standard"
+      resources:
+        requests:
+          storage: 1Gi
