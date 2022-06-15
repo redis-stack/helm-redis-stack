@@ -30,7 +30,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: "{{ .Values.server_name }}"
-        image: "{{ .Values.statefulset.image }}:{{ .Values.statefulset.tag }}"
+        image: {{ .Values.statefulset.image }}
         imagePullPolicy: Always
         ports:
         - containerPort: 6379

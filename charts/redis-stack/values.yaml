@@ -4,5 +4,4 @@ deployment:
 name: redis-stack
 server_name: redis-stack-server
 statefulset:
-  image: "redis-stack-server"
-  tage: latest
+  image: "redis/redis-stack-server"
