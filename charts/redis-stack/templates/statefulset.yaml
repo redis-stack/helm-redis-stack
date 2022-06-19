@@ -19,18 +19,18 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: "{{ .Values.server_name }}" # has to match .spec.template.metadata.labels
+      app: "{{ .Values.server_name }}" 
   serviceName: "{{ .Values.server_name }}"
   replicas: 1
   template:
     metadata:
       labels:
-        app: "{{ .Values.server_name }}" # has to match .spec.selector.matchLabels
+        app: "{{ .Values.server_name }}" 
     spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: "{{ .Values.server_name }}"
-        image: {{ .Values.statefulset.image }}
+        image: {{ .Values.statefulset.image }}:{{ .Values.statefulset.tag }}
         imagePullPolicy: Always
         ports:
         - containerPort: 6379
@@ -40,7 +40,7 @@ spec:
       name: db
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: "standard"
+      storageClassName: local-path
       resources:
         requests:
           storage: 1Gi
