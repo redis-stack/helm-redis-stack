@@ -1,0 +1,8 @@
+deployment:
+  image: "redis/redis-stack"
+  tag: "6.2.2-v4"
+name: redis-stack
+server_name: redis-stack-server
+statefulset:
+  image: "redis/redis-stack-server"
+  tag: "6.2.2-v4"
