@@ -40,7 +40,7 @@ spec:
       name: db
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: local-path
+      storageClassName: "{{ .Values.statefulset.storage_class }}"
       resources:
         requests:
           storage: 1Gi

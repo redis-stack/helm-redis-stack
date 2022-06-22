@@ -6,3 +6,4 @@ server_name: redis-stack-server
 statefulset:
   image: "redis/redis-stack-server"
   tag: "latest"
+  storage_class: "local-path"
