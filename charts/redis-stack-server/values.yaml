@@ -1,0 +1,8 @@
+name: redis-stack-server
+redis_stack_server:
+  image: "redis/redis-stack-server"
+  tag: "latest"
+  port: 6379
+  replicas: 1
+  storage_class: "local-path"
+  storage: 1Gi

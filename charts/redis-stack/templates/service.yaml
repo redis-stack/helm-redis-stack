@@ -10,7 +10,7 @@ spec:
     name: "{{ .Values.name }}"
     targetPort: {{ .Values.redis_stack.redis_server_port }}
   - port: {{ .Values.redis_stack.redis_insight_port }}
-    name: "{{.Values.redis_stack.redis_insight}}"
+    name: "{{.Values.redis_stack.redis_insight }}"
     targetPort: {{ .Values.redis_stack.redis_insight_port }}
   type: NodePort
   selector:
