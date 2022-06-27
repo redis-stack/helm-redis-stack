@@ -5,7 +5,7 @@ metadata:
   labels:
     app: "{{ .Values.name }}"
 spec:
-  replicas: 2
+  replicas: {{ .Values.redis_stack.replicas }}
   selector:
     matchLabels:
       app: "{{ .Values.name }}"
@@ -16,19 +16,22 @@ spec:
     spec:
       containers:
       - name: "{{ .Values.name }}"
-        image: {{ .Values.deployment.image }}:{{ .Values.deployment.tag }}
+        image: {{ .Values.redis_stack.image }}:{{ .Values.redis_stack.tag }}
         imagePullPolicy: Always
         ports:
-        - containerPort: 6379
-        {{- if .Values.deployment.resources }}
+        - containerPort: {{ .Values.redis_stack.redis_server_port }}
+          name: db
+        - containerPort: {{ .Values.redis_stack.redis_insight_port }}
+          name: "{{ .Values.redis_stack.redis_insight }}"
+        {{- if .Values.redis_stack.resources }}
         resources:
-          {{- if .Values.deployment.resources.requests }}
+          {{- if .Values.redis_stack.resources.requests }}
           requests:
-            memory: {{ .Values.deployment.resources.requests.memory | default "50Mi" | quote }}
-            cpu: {{ .Values.deployment.resources.requests.cpu | default "10m" | quote }}
+            memory: {{ .Values.redis_stack.resources.requests.memory | default "1Gi" | quote }}
+            cpu: {{ .Values.redis_stack.resources.requests.cpu | default "10m" | quote }}
           {{- else}}
           requests:
-            memory: "50Mi"
-            cpu: "10m"
+            memory: "{{ .Values.redis_stack.memory }}"
+            cpu: "{{ .Values.redis_stack.cpu }}"
           {{- end}}
         {{- end}}

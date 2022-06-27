@@ -1,8 +1,11 @@
-deployment:
+name: redis-stack
+redis_stack:
   image: "redis/redis-stack"
   tag: "latest"
-name: redis-stack
-server_name: redis-stack-server
-statefulset:
-  image: "redis/redis-stack-server"
-  tag: "latest"
+  redis_insight: "redis-insight"
+  redis_insight_port: 8001
+  redis_server_port: 6379
+  replicas: 1
+  memory: 1Gi
+  cpu: 100m
+  

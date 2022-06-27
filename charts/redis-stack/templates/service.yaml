@@ -6,9 +6,12 @@ metadata:
     app: "{{ .Values.name }}"
 spec:
   ports:
-  - port: 6379
+  - port: {{ .Values.redis_stack.redis_server_port }}
     name: "{{ .Values.name }}"
-    targetPort: 6379
+    targetPort: {{ .Values.redis_stack.redis_server_port }}
+  - port: {{ .Values.redis_stack.redis_insight_port }}
+    name: "{{.Values.redis_stack.redis_insight}}"
+    targetPort: {{ .Values.redis_stack.redis_insight_port }}
   type: NodePort
   selector:
     app: "{{ .Values.name }}"

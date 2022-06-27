@@ -1,22 +1,28 @@
 # Redis-stack helm chart
 ## Installation
 
-To install the helm chart with latest images, run:
+To install redis-stack helm chart with latest images, run:
 
 ```bash
 helm install redis-stack charts/redis-stack --values charts/redis-stack/values.yaml
 ```
 
+To install redis-stack-server helm chart with latest images, run:
+
+```bash
+helm install redis-stack charts/redis-stack-server --values charts/redis-stack-server/values.yaml
+```
+
 To install the helm chart with specific redis tag, just add ```--set``` tag:
 
 ```bash
-helm install redis-stack charts/redis-stack --values charts/redis-stack/values.yaml --set statefulset.tag="<TAG>"
+helm install redis-stack charts/redis-stack --values charts/redis-stack/values.yaml --set redis_stack.tag="<TAG>"
 ```
 
 For example, to run redis stack with redis version 7.0.0, run:
 
 ```bash
-helm install redis-stack charts/redis-stack --values charts/redis-stack/values.yaml --set statefulset.tag="7.0.0-RC5"
+helm install redis-stack charts/redis-stack --values charts/redis-stack/values.yaml --set redis_stack.tag="7.0.0-RC5"
 ```
 
 ## Usage
