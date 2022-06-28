@@ -1,3 +1,4 @@
+[![Release Charts](https://github.com/redis-stack/helm-redis-stack/actions/workflows/release.yml/badge.svg)](https://github.com/redis-stack/helm-redis-stack/actions/workflows/release.yml)
 # Redis-stack helm chart
 ## Installation
 
