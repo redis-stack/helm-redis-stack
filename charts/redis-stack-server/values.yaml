@@ -1,8 +1,8 @@
 name: redis-stack-server
 redis_stack_server:
   image: "redis/redis-stack-server"
-  tag: "6.2.2-v4"
+  tag: "6.2.2-v5"
   port: 6379
   replicas: 1
-  storage_class: "local-path"
+  storage_class: standard
   storage: 1Gi
