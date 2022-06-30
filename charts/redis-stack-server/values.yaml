@@ -4,5 +4,5 @@ redis_stack_server:
   tag: "6.2.2-v5"
   port: 6379
   replicas: 1
-  storage_class: "local-path"
+  storage_class: standard
   storage: 1Gi
