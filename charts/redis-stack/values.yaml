@@ -8,4 +8,3 @@ redis_stack:
   replicas: 1
   memory: 1Gi
   cpu: 100m
-
