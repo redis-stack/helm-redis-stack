@@ -1,7 +1,7 @@
 name: redis-stack
 redis_stack:
   image: "redis/redis-stack"
-  tag: "6.2.4-v2"
+  tag: "6.2.6-v1"
   redis_insight: "redis-insight"
   redis_insight_port: 8001
   redis_server_port: 6379
