@@ -35,6 +35,9 @@ spec:
         ports:
         - containerPort: {{ .Values.redis_stack_server.port }}
           name: db
+        volumeMounts:
+        - name: db
+          mountPath: /data
   volumeClaimTemplates:
   - metadata:
       name: db
