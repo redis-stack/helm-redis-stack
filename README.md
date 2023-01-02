@@ -1,6 +1,6 @@
 [![Helm Chart](https://img.shields.io/github/v/release/redis-stack/helm-redis-stack.svg)](https://github.com/redis-stack/helm-redis-stack/releases/latest)
-[![redis-stack docker pulls](https://img.shields.io/docker/pulls/redis/redis-stack)](https://img.shields.io/docker/pulls/redis/redis-stack)
-[![redis-stack-server docker pulls](https://img.shields.io/docker/pulls/redis/redis-stack-server)](https://img.shields.io/docker/pulls/redis/redis-stack-server)
+[![redis-stack docker pulls](https://img.shields.io/docker/pulls/redis/redis-stack?label=redis-stack)](https://img.shields.io/docker/pulls/redis/redis-stack)
+[![redis-stack-server docker pulls](https://img.shields.io/docker/pulls/redis/redis-stack-server?label=redis-stack-server)](https://img.shields.io/docker/pulls/redis/redis-stack-server)
 
 # Redis-stack helm chart
 ## Installation
