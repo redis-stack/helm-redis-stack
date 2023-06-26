@@ -45,4 +45,4 @@ jobs:
 
       - name: Verify helm repo add
         run: |
-          helm repo add ${{ github.event.repository.name }} https://github.com/redis-stack/helm-redis-stack.git
+          helm repo add ${{ github.event.repository.name }} https://redis-stack.github.io/helm-redis-stack 
