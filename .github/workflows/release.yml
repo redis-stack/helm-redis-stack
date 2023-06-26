@@ -5,6 +5,8 @@ on:
     branches:
       - main
 
+  workflow_dispatch:
+
 jobs:
   release:
     # depending on default permission settings for your org (contents being read-only or read-write for workloads), you will have to add permissions
@@ -39,10 +41,11 @@ jobs:
         run: ct install --target-branch ${{ github.event.repository.default_branch }}
 
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.4.0
+        uses: helm/chart-releaser-action@1.5.0
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          CR_SKIP_EXISTING: true
 
       - name: Verify helm repo add
         run: |
-          helm repo add ${{ github.event.repository.name }} https://redis-stack.github.io/helm-redis-stack 
+          helm repo add ${{ github.event.repository.name }} https://redis-stack.github.io/helm-redis-stack
