@@ -29,6 +29,12 @@ For example, to run redis stack with redis version 7.0.0, run:
 helm install redis-stack charts/redis-stack --values charts/redis-stack/values.yaml --set redis_stack.tag="7.0.0-RC5"
 ```
 
+To add the repo:
+
+```bash
+helm repo add redis-stack https://redis-stack.github.io/helm-redis-stack/
+```
+
 ## Usage
 
 To connect to redis-cli run:
