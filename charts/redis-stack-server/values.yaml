@@ -1,7 +1,7 @@
 name: redis-stack-server
 redis_stack_server:
   image: "redis/redis-stack-server"
-  tag: "7.2.0-v1"
+  tag: "7.2.0-v2"
   port: 6379
   replicas: 1
   storage_class: standard
