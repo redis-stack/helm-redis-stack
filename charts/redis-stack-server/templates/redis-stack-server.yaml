@@ -9,7 +9,7 @@ spec:
   ports:
   - port: {{ .Values.redis_stack_server.port }}
     name: db
-  type: {{ .Values.redis_stack_server.serviceType }}
+  type: NodePort
   selector:
     app: "{{ .Values.name }}"
 ---
@@ -39,24 +39,6 @@ spec:
         volumeMounts:
         - name: db
           mountPath: /data
-        {{- with .Values.redis_stack_server.env }}
-        env:
-        {{- toYaml . | nindent 8 }}
-        {{- end }}
-        {{- with .Values.redis_stack_server.resources }}
-        resources:
-        {{- toYaml . | nindent 10 }}
-        {{- end }}
-      {{- with .Values.redis_stack_server.nodeSelector }}
-      nodeSelector:
-        {{ range $key, $value := . }}
-        {{ $key }}: {{ $value | quote }}
-        {{- end }}
-      {{- end }}
-      {{- with .Values.redis_stack_server.tolerations }}
-      tolerations:
-      {{- toYaml . | nindent 6 }}
-      {{- end }}
   volumeClaimTemplates:
   - metadata:
       name: db
