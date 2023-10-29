@@ -66,3 +66,4 @@ spec:
       resources:
         requests:
           storage: {{ .Values.redis_stack_server.storage }}
+          
