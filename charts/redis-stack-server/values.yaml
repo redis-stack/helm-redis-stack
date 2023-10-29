@@ -13,17 +13,3 @@ redis_stack_server:
       secretKeyRef:
         name: redis-stack-server
         key: redis-args
-  resources:
-    limits:
-      cpu: 200m
-      memory: 2Gi
-    requests:
-      cpu: 100m
-      memory: 1Gi
-  nodeSelector:
-    type: app
-  tolerations:
-  - effect: NoSchedule
-    key: NodeType
-    operator: Equal
-    value: app
