@@ -16,10 +16,10 @@ redis_stack_server:
   resources:
     limits:
       cpu: 200m
-      memory: 800Mi
+      memory: 2Gi
     requests:
       cpu: 100m
-      memory: 500Mi
+      memory: 1Gi
   nodeSelector:
     type: app
   tolerations:
