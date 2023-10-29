@@ -3,6 +3,27 @@ redis_stack_server:
   image: "redis/redis-stack-server"
   tag: "7.2.0-v4"
   port: 6379
+  serviceType: ClusterIP
   replicas: 1
-  storage_class: standard
+  storage_class: default
   storage: 1Gi
+  env:
+  - name: REDIS_ARGS
+    valueFrom:
+      secretKeyRef:
+        name: redis-stack-server
+        key: redis-args
+  resources:
+    limits:
+      cpu: 200m
+      memory: 400Mi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  nodeSelector:
+    type: app
+  tolerations:
+  - effect: NoSchedule
+    key: NodeType
+    operator: Equal
+    value: app
