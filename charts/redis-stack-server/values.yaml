@@ -15,11 +15,11 @@ redis_stack_server:
         key: redis-args
   resources:
     limits:
-      cpu: 200m
-      memory: 400Mi
+      cpu: 1
+      memory: 4G
     requests:
-      cpu: 100m
-      memory: 256Mi
+      cpu: 1
+      memory: 4G
   nodeSelector:
     type: app
   tolerations:

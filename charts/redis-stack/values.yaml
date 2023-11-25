@@ -8,3 +8,10 @@ redis_stack:
   replicas: 1
   memory: 1Gi
   cpu: 100m
+  nodeSelector:
+    type: app
+  tolerations:
+  - effect: NoSchedule
+    key: NodeType
+    operator: Equal
+    value: app
