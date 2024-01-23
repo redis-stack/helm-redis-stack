@@ -24,6 +24,10 @@ spec:
           name: db
         - containerPort: {{ .Values.redis_stack.redis_insight_port }}
           name: "{{ .Values.redis_stack.redis_insight }}"
+        {{- with .Values.redis_stack.env }}
+        env:
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
         {{- if .Values.redis_stack.resources }}
         resources:
           {{- if .Values.redis_stack.resources.requests }}
@@ -36,3 +40,13 @@ spec:
             cpu: "{{ .Values.redis_stack.cpu }}"
           {{- end}}
         {{- end}}
+      {{- with .Values.redis_stack.nodeSelector }}
+      nodeSelector:
+        {{ range $key, $value := . }}
+        {{ $key }}: {{ $value | quote }}
+        {{- end }}
+      {{- end }}
+      {{- with .Values.redis_stack.tolerations }}
+      tolerations:
+      {{- toYaml . | nindent 6 }}
+      {{- end }}
