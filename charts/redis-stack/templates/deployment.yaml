@@ -36,3 +36,7 @@ spec:
             cpu: "{{ .Values.redis_stack.cpu }}"
           {{- end}}
         {{- end}}
+{{- if .Values.redis_stack.affinity }}
+      affinity:
+{{ toYaml .Values.redis_stack.affinity | indent 8 }}
+{{- end }}
