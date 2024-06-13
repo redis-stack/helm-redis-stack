@@ -20,13 +20,13 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: "{{ .Values.name }}" 
+      app: "{{ .Values.name }}"
   serviceName: "{{ .Values.name }}"
   replicas: {{ .Values.redis_stack_server.replicas }}
   template:
     metadata:
       labels:
-        app: "{{ .Values.name }}" 
+        app: "{{ .Values.name }}"
     spec:
       terminationGracePeriodSeconds: 10
       containers:
@@ -48,3 +48,7 @@ spec:
       resources:
         requests:
           storage: {{ .Values.redis_stack_server.storage }}
+{{- if .Values.redis_stack_server.affinity }}
+      affinity:
+{{ toYaml .Values.redis_stack_server.affinity | indent 8 }}
+{{- end }}

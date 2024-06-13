@@ -6,3 +6,4 @@ redis_stack_server:
   replicas: 1
   storage_class: standard
   storage: 1Gi
+  affinity: {}
