@@ -1,9 +1,20 @@
 name: redis-stack-server
+
 redis_stack_server:
   image: "redis/redis-stack-server"
   tag: "7.4.0-v1"
-  port: 6379
   replicas: 1
-  storage_class: standard
-  storage: 1Gi
-  affinity: {}
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  persistence:
+    enabled: false
+    size: 1Gi
+    # storageClass: standard
+  service:
+    port: 6379
+    type: ClusterIP
