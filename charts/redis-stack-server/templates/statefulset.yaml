@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: "{{ .Values.name }}"
+spec:
+  selector:
+    matchLabels:
+      app: "{{ .Values.name }}"
+  serviceName: "{{ .Values.name }}"
+  replicas: {{ .Values.redis_stack_server.replicas }}
+  template:
+    metadata:
+      labels:
+        app: "{{ .Values.name }}"
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: "{{ .Values.name }}"
+        image: {{ .Values.redis_stack_server.image }}:{{ .Values.redis_stack_server.tag }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 6379
+          name: redis
+        {{- if .Values.redis_stack_server.persistence.enabled }}
+        volumeMounts:
+        - name: redis-data
+          mountPath: /data
+        {{- end }}
+        resources:
+          {{- if .Values.redis_stack_server.resources }}
+          requests:
+            memory: {{ .Values.redis_stack_server.resources.requests.memory }}
+            cpu: {{ .Values.redis_stack_server.resources.requests.cpu }}
+          limits:
+            memory: {{ .Values.redis_stack_server.resources.limits.memory }}
+            cpu: {{ .Values.redis_stack_server.resources.limits.cpu }}
+          {{- end }}
+        readinessProbe:
+          exec:
+            command:
+            - redis-cli
+            - ping
+          initialDelaySeconds: 5
+          periodSeconds: 20
+        livenessProbe:
+          exec:
+            command:
+            - redis-cli
+            - ping
+          initialDelaySeconds: 30
+          periodSeconds: 20
+  {{- if .Values.redis_stack_server.persistence.enabled }}
+  volumeClaimTemplates:
+  - metadata:
+      name: db
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: {{ .Values.redis_stack_server.storageClass }}
+      resources:
+        requests:
+          storage: {{ .Values.redis_stack_server.size | default "1Gi" }}
+  {{- end }}
+{{- if .Values.redis_stack_server.affinity }}
+      affinity:
+{{ toYaml .Values.redis_stack_server.affinity | indent 8 }}
+{{- end }}
