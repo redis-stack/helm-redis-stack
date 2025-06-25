@@ -7,3 +7,16 @@ redis_stack_server:
   storage_class: standard
   storage: 1Gi
   affinity: {}
+ingress:
+  enabled: true
+  name: redis-stack-server-ingress
+  className: alb
+  annotations: {}
+  tls: []
+  hosts:
+    - host: redis-ss.onemedtest.com
+      paths:
+        - path: /
+          pathType: Prefix
+  serviceName: redis-stack-server
+  servicePort: 6379

@@ -1,3 +1,6 @@
+{{- if .Values.ingress.enabled -}}
+{{- $svcPort := .Values.redis_stack_server.port -}}
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -51,4 +54,44 @@ spec:
 {{- if .Values.redis_stack_server.affinity }}
       affinity:
 {{ toYaml .Values.redis_stack_server.affinity | indent 8 }}
+{{- end }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: {{ .Values.name }}
+  labels:
+    app: "{{ .Values.name }}"
+  {{- with .Values.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  ingressClassName: {{ .Values.ingress.className }}
+  {{- if .Values.ingress.tls }}
+  tls:
+    {{- range .Values.ingress.tls }}
+    - hosts:
+        {{- range .hosts }}
+        - {{ . | quote }}
+        {{- end }}
+      secretName: {{ .secretName }}
+    {{- end }}
+  {{- end }}
+  rules:
+    {{- range .Values.ingress.hosts }}
+    - host: {{ .host | quote }}
+      http:
+        paths:
+          {{- range .paths }}
+          - path: {{ .path }}
+            pathType: {{ .pathType }}
+            backend:
+              service:
+                name: {{ $.Values.name }}
+                port:
+                  number: {{ $svcPort }}
+          {{- end }}
+    {{- end }}
 {{- end }}
