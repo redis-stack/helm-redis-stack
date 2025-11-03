@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   redis-stack:
   - apiVersion: v2
+    appVersion: 7.4.8
+    created: "2025-11-03T14:01:13.330787337Z"
+    description: A Helm chart for Kubernetes
+    digest: 1c21c176be309ebb961e99d3e6375eeeba451f78dfdc9928bb6a773d5f674f7d
+    name: redis-stack
+    type: application
+    urls:
+    - https://github.com/redis-stack/helm-redis-stack/releases/download/redis-stack-0.4.21/redis-stack-0.4.21.tgz
+    version: 0.4.21
+  - apiVersion: v2
     appVersion: 7.4.7
     created: "2025-10-03T13:08:20.810740351Z"
     description: A Helm chart for Kubernetes
@@ -253,6 +263,16 @@ entries:
     version: 0.3.7
   redis-stack-server:
   - apiVersion: v2
+    appVersion: 7.4.8
+    created: "2025-11-03T14:01:13.547581672Z"
+    description: A Helm chart for Kubernetes
+    digest: 9c16f47177e69018a58da51c49cbe4e04ade6f6e4d3f66fb7e68799fb599af05
+    name: redis-stack-server
+    type: application
+    urls:
+    - https://github.com/redis-stack/helm-redis-stack/releases/download/redis-stack-server-0.4.21/redis-stack-server-0.4.21.tgz
+    version: 0.4.21
+  - apiVersion: v2
     appVersion: 7.4.7
     created: "2025-10-03T13:08:20.955265047Z"
     description: A Helm chart for Kubernetes
@@ -502,4 +522,4 @@ entries:
     urls:
     - https://github.com/redis-stack/helm-redis-stack/releases/download/redis-stack-server-0.3.7/redis-stack-server-0.3.7.tgz
     version: 0.3.7
-generated: "2025-10-03T13:08:20.955594923Z"
+generated: "2025-11-03T14:01:13.548002979Z"
