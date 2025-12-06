@@ -7,3 +7,10 @@ redis_stack_server:
   storage_class: standard
   storage: 1Gi
   affinity: {}
+  resources:
+    requests:
+      cpu: 100m
+      memory: 1Gi
+    limits:
+      cpu: 500m
+      memory: 2Gi

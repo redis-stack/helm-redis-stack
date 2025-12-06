@@ -36,6 +36,10 @@ spec:
         ports:
         - containerPort: {{ .Values.redis_stack_server.port }}
           name: db
+        {{- with .Values.redis_stack_server.resources }}
+        resources:
+{{ toYaml . | nindent 10 }}
+        {{- end }}
         volumeMounts:
         - name: db
           mountPath: /data
